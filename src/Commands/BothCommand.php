@@ -68,7 +68,7 @@ class BothCommand extends Command
 
     protected static function getStubs($type)
     {
-        return file_get_contents("vendor/thecoderepublic/repository/src/resources/$type.stub");
+        return file_get_contents("vendor/scriemcodat/repository/src/resources/$type.stub");
     }
 
 
