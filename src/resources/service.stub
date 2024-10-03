@@ -1,0 +1,13 @@
+<?php
+namespace {{ namespace }};
+
+use ScriemCodat\Repository\AbstractService;
+
+class {{modelName}}Service extends AbstractService
+{
+
+    public function __construct()
+    {
+        //code
+    }
+}
