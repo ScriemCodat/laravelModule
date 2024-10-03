@@ -1,0 +1,25 @@
+{
+    "name": "scriemcodat/repository",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ionut",
+            "email": "ionut.rusen@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "autoload": {
+        "psr-4": {
+            "ScriemCodat\\Repository\\": "src/"
+        }
+    },
+    "require": {},
+    "extra": {
+	"laravel": {
+	   "providers": [
+		"ScriemCodat\\Repository\\RepositoryServiceProvider"
+	    ]
+	}
+    }
+}

@@ -1,0 +1,14 @@
+<?php
+namespace {{ namespace }};
+
+use ScriemCodat\Repository\AbstractRepository;
+use {{ namespacedModel }};
+
+class {{modelName}}Repository extends AbstractRepository
+{
+
+    public function __construct({{modelName}} $model)
+    {
+        $this->model = $model;
+    }
+}
