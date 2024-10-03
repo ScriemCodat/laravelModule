@@ -1,0 +1,11 @@
+<?php
+namespace {{ namespaceWrite }};
+
+
+
+
+interface Write{{modelName}}RepositoryInterface {
+  public function create{{modelName}}($data);
+  public function update{{modelName}}($id, $data);
+  public function delete{{modelName}}($id);
+}
