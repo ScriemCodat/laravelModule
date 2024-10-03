@@ -2,12 +2,21 @@
 
 namespace {{ namespace }};
 
+use App\Modules\{{ model }}\Interface\Read{{ model }}RepositoryInterface;
+use App\Modules\{{ model }}\Interface\Write{{ model }}RepositoryInterface;
 use {{ namespacedModel }};
 use {{ rootNamespace }}Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 class {{ class }} extends Controller
 {
+ protected Read{{ model }}RepositoryInterface ${{ modelVariable }}ReadRepository;
+ protected Write{{ model }}RepositoryInterface ${{ modelVariable }}WriteRepository;
+
+    public function __construct(Read{{ model }}RepositoryInterface ${{ modelVariable }}ReadRepository, Write{{ model }}RepositoryInterface ${{ modelVariable }}WriteRepository){
+        $this->{{ modelVariable }}ReadRepository = ${{ modelVariable }}ReadRepository;
+        $this->{{ modelVariable }}WriteRepository = ${{ modelVariable }}WriteRepository;
+    }
     /**
      * Display a listing of the resource.
      */
@@ -29,7 +38,7 @@ class {{ class }} extends Controller
      */
     public function store(Request $request)
     {
-        //
+        ${{ modelVariable }} = $this->{{ modelVariable }}WriteRepository->createMata{{ model }}(${{ modelVariable }});
     }
 
     /**
@@ -37,7 +46,7 @@ class {{ class }} extends Controller
      */
     public function show({{ model }} ${{ modelVariable }})
     {
-        //
+        ${{ modelVariable }} = $this->{{ modelVariable }}ReadRepository->get{{ model }}(${{ modelVariable }});
     }
 
     /**
