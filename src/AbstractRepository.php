@@ -6,6 +6,7 @@ Abstract class AbstractRepository
 { 
     protected $model;
 
+	
     public function getModel()
     {
         return $this->model;
