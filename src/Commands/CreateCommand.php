@@ -34,41 +34,8 @@ class CreateCommand extends Command
         $this->name = $this->argument('name');
 
         $this->createFolders();
-        return;
-
-        //SERVICE
-        if ( ! file_exists ( $path = base_path ( "app/Modules/{$name}/Services" ) ) )
-            mkdir($path, 0777, true);
 
 
-
-        self::createService($name);
-
-      /*  $this->info("Service pattern implemented for model ". $name);
-
-        //REPO
-        if ( ! file_exists ( $path = base_path ( "app/Modules/{$name}/Repositories" ) ) )
-            mkdir($path, 0777, true);
-
-        if ( file_exists ( base_path ( "app/Modules/{$name}/Repositories/{$name}Repository.php" ) ) ) {
-            $this->error("Repository with that name ({$name}) already exists");
-            exit(0);
-        }*/
-
-       /* self::createRepository($name);
-
-        $this->info("Repository pattern implemented for model ". $name);
-
-        //Interface
-        if ( ! file_exists ( $path = base_path ( "app/Modules/{$name}/Interfaces" ) ) )
-            mkdir($path, 0777, true);
-
-        if ( file_exists ( base_path ( "app/Modules/{$name}/Interfaces/{$name}Interface.php" ) ) ) {
-            $this->error("Interface with that name ({$name}) already exists");
-            exit(0);
-        }
-
-        self::createInterface($name);*/
 
         $this->info("Interface pattern implemented");
 
@@ -82,6 +49,10 @@ class CreateCommand extends Command
                 mkdir($path, 0777, true);
             }
 
+            if ($type == 'interface') {
+                $this->implementInterface($type);
+                continue  ;
+            }
 
             if ( !file_exists ( base_path ( "app/Modules/".ucfirst($this->name)."/".ucfirst($type)."/".ucfirst($this->name).ucfirst($type).".php" ) ) ) {
                 $this->implement($type);
@@ -89,6 +60,29 @@ class CreateCommand extends Command
         }
     }
 
+    private function implementInterface($type)
+    {
+        $search = [
+            '{{modelName}}',
+            '{{ namespaceRead }}',
+            '{{ namespaceWrite }}',
+
+
+        ];
+        $replace = [
+            ucfirst($this->name),
+            'App\Modules\\'.ucfirst($this->name).'\\Interface',
+            'App\Modules\\'.ucfirst($this->name).'\\Interface',
+
+        ];
+
+        $template = str_replace( $search, $replace, self::GetStubs('readinterface') );
+        file_put_contents(base_path ( "app/Modules/".ucfirst($this->name)."/".ucfirst($type)."/Read".ucfirst($this->name)."RepositoryInterface.php" ), $template);
+     $template = str_replace( $search, $replace, self::GetStubs('writeinterface') );
+            file_put_contents(base_path ( "app/Modules/".ucfirst($this->name)."/".ucfirst($type)."/Write".ucfirst($this->name)."RepositoryInterface.php" ), $template);
+
+
+    }
 
     protected static function getStubs($type)
     {
