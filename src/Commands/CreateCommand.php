@@ -63,6 +63,8 @@ class CreateCommand extends Command
         }
         \Artisan::call('make:factory', ['name' => ucfirst($this->name)]);
         \Artisan::call('make:migration', ['name' => 'create'.$this->name.'s_table']);
+        \Artisan::call('make:test', ['name' => ucfirst($this->name)]);
+
     }
 
     private function implementInterface($type)
