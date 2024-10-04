@@ -2,20 +2,17 @@
 
 namespace {{ namespace }};
 
-use App\Modules\{{ model }}\Interface\Read{{ model }}RepositoryInterface;
-use App\Modules\{{ model }}\Interface\Write{{ model }}RepositoryInterface;
+use App\Modules\{{ model }}\Repository\{{ model }}Repository;
 use App\Modules\{{ model }}\Request\{{ model }}Request;
 use {{ namespacedModel }};
 use {{ rootNamespace }}Http\Controllers\Controller;
 
 class {{ class }} extends Controller
 {
- protected Read{{ model }}RepositoryInterface ${{ modelVariable }}ReadRepository;
- protected Write{{ model }}RepositoryInterface ${{ modelVariable }}WriteRepository;
+ protected {{ model }}Repository  ${{ modelVariable }}Repository;
 
-    public function __construct(Read{{ model }}RepositoryInterface ${{ modelVariable }}ReadRepository, Write{{ model }}RepositoryInterface ${{ modelVariable }}WriteRepository){
-        $this->{{ modelVariable }}ReadRepository = ${{ modelVariable }}ReadRepository;
-        $this->{{ modelVariable }}WriteRepository = ${{ modelVariable }}WriteRepository;
+    public function __construct({{ model }}Repository ${{ modelVariable }}Repository){
+        $this->{{ modelVariable }}Repository = ${{ modelVariable }}Repository;
     }
     /**
      * Display a listing of the resource.
