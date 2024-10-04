@@ -10,7 +10,7 @@ class CreateCommand extends Command
     private $types = [
         'controller',
         'interface',
-        'migration',
+        'request',
         'model',
         'observer',
         'repository',
@@ -18,7 +18,7 @@ class CreateCommand extends Command
 
     ];
     protected $name;
-    protected $signature = 'create:all {name : ModelName (ex: Company)}';
+    protected $signature = 'create:module {name : ModelName (ex: Company)}';
 
     protected $description = 'Create a Module Directory with Service, Repository and Interface';
 
@@ -56,8 +56,13 @@ class CreateCommand extends Command
 
             if ( !file_exists ( base_path ( "app/Modules/".ucfirst($this->name)."/".ucfirst($type)."/".ucfirst($this->name).ucfirst($type).".php" ) ) ) {
                 $this->implement($type);
+            }else{
+                $this->error("Module with that name ({$this->name}) already exists");
+                exit(0);
             }
         }
+        \Artisan::call('make:factory', ['name' => ucfirst($this->name)]);
+        \Artisan::call('make:migration', ['name' => 'create'.$this->name.'s_table']);
     }
 
     private function implementInterface($type)
