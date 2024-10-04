@@ -46,7 +46,7 @@ class {{ class }} extends Controller
      */
     public function show(int  ${{ modelVariable }})
     {
-        ${{ modelVariable }} = $this->{{ modelVariable }}ReadRepository->findOrFail{{ model }}(${{ modelVariable }});
+        ${{ modelVariable }} = $this->{{ modelVariable }}ReadRepository->findOrFail(${{ modelVariable }});
     }
 
     /**
