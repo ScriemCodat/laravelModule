@@ -3,8 +3,9 @@
 namespace {{ namespace }};
 
 use {{ namespacedModel }};
+use Illuminate\Contracts\Events\ShouldHandleEventsAfterCommit;
 
-class {{ class }}
+class {{ class }} implements ShouldHandleEventsAfterCommit
 {
     /**
      * Handle the {{ model }} "created" event.
