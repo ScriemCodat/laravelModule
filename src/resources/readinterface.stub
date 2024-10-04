@@ -5,8 +5,8 @@ namespace {{ namespaceRead }};
 
 interface Read{{modelName}}RepositoryInterface
 {
-    public function get{{modelName}}s();
-    public function get{{modelName}}($id);
+    public function get();
+    public function find($id);
 }
 
 
