@@ -3,6 +3,7 @@
 namespace ScriemCodat\Repository\Commands;
 
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
 
 class CreateCommand extends Command
 {
@@ -62,7 +63,7 @@ class CreateCommand extends Command
             }
         }
         \Artisan::call('make:factory', ['name' => ucfirst($this->name)]);
-        \Artisan::call('make:migration', ['name' => 'create'.$this->name.'s_table']);
+        \Artisan::call('make:migration', ['name' => 'create'. Str::plural($this->name).'_table']);
         \Artisan::call('make:test', ['name' => ucfirst($this->name).'Test']);
 
     }
