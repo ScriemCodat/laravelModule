@@ -7,6 +7,16 @@ interface Read{{modelName}}RepositoryInterface
 {
     public function get();
     public function find($id);
+    public function findOrFail($id);
+    public function all($columns = ['*'], $relations = []);
+    public function allTrashed();
+    public function findById($id, $columns=['*'], $relations=[], $append=[]);
+    public function findByColumns($conditions, $columns=['*'], $relations=[]);
+public function findTrashedById($id);
+ public function findOnlyTrashedById($id);
+    public function first();
+
+
 }
 
 
