@@ -83,8 +83,8 @@ class CreateCommand extends Command
 
         $template = str_replace( $search, $replace, self::GetStubs('readinterface') );
         file_put_contents(base_path ( "app/Modules/".ucfirst($this->name)."/".ucfirst($type)."/Read".ucfirst($this->name)."RepositoryInterface.php" ), $template);
-     $template = str_replace( $search, $replace, self::GetStubs('writeinterface') );
-            file_put_contents(base_path ( "app/Modules/".ucfirst($this->name)."/".ucfirst($type)."/Write".ucfirst($this->name)."RepositoryInterface.php" ), $template);
+        $template = str_replace( $search, $replace, self::GetStubs('writeinterface') );
+        file_put_contents(base_path ( "app/Modules/".ucfirst($this->name)."/".ucfirst($type)."/Write".ucfirst($this->name)."RepositoryInterface.php" ), $template);
 
 
     }
