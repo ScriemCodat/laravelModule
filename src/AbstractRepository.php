@@ -132,4 +132,9 @@ Abstract class AbstractRepository
 	    return $this->getModel()->with($relations)->where($column, $value)->update($data);
     }
 
+    public function searchByValues(array $values, string $search)
+    {
+        return $this->getModel()->whereAny($values, '%' . strtolower($search) . '%' );
+    }
+
 }
