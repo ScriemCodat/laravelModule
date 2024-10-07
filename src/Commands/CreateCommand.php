@@ -9,8 +9,9 @@ class CreateCommand extends Command
 {
 
     private $types = [
-        'controller',
+       'controller',
         'interface',
+        'resource',
         'request',
         'model',
         'observer',
