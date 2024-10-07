@@ -15,7 +15,7 @@ interface Read{{modelName}}RepositoryInterface
     public function findTrashedById($id);
     public function findOnlyTrashedById($id);
     public function first();
-    public function searchByValues($values, $search);
+    public function searchByValues(array $values, string $search);
 }
 
 
