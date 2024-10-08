@@ -15,7 +15,9 @@ interface Read{{modelName}}RepositoryInterface
     public function findTrashedById($id);
     public function findOnlyTrashedById($id);
     public function first();
-    public function searchByValues(array $values, string $search);
+   // public function searchByValues(array $values, string $search);
+    public function getPaginated(?string $q, ?string $sortBy,array $searchIn,array $validSortColumns, string $orderBy = 'asc', int $itemsPerPage = 15, int $page = 1): LengthAwarePaginator ;
+
 }
 
 
