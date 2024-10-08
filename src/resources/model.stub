@@ -10,6 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 #[ObservedBy({{ class }}Observer::class)]
 class {{ class }} extends Model
 {
-    public static $factory = {{ class }}Factory::class;
+    protected static string $factory = {{ class }}Factory::class;
     use HasFactory;
 }
