@@ -137,4 +137,22 @@ Abstract class AbstractRepository
         return $this->getModel()->whereAny($values, '%' . strtolower($search) . '%' );
     }
 
+	 public function getPaginated(?string $q, ?string $sortBy,array $searchIn,array $validSortColumns, string $orderBy = 'asc', int $itemsPerPage = 15, int $page = 1): LengthAwarePaginator
+    {
+         $likeTerm = config('database.default') == 'pgsql' ? 'ILIKE' : 'LIKE';
+         $querys = $this->getModel()->query();
+         if ($q) {
+            $querys->where(function ($query) use ($q,$searchIn,$likeTerm) {
+                $query->whereAny($searchIn,$likeTerm, '%' . strtolower($q) . '%');
+            });
+         }
+         if (in_array($sortBy, $validSortColumns)) {
+            $querys->orderBy($sortBy, $orderBy);
+         } else {
+            $querys->orderBy('id', 'asc');
+         }
+        return   $querys->paginate($itemsPerPage, ['*'], 'page', $page);
+    }
+
+
 }
