@@ -1,6 +1,6 @@
 <?php
 namespace ScriemCodat\Repository;
-
+use Illuminate\Pagination\LengthAwarePaginator;
 
 Abstract class AbstractRepository
 { 
