@@ -3,11 +3,13 @@
 namespace {{ namespace }};
 use App\Modules\{{ class }}\Observer\{{ class }}Observer;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Database\Factories\{{ class }}Factory;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 #[ObservedBy({{ class }}Observer::class)]
 class {{ class }} extends Model
 {
+    public static $factory = {{ class }}Factory::class;
     use HasFactory;
 }
