@@ -2,18 +2,18 @@
 
 namespace {{ namespace }};
 
-use App\Modules\{{ model }}\Repository\{{ model }}Repository;
 use App\Modules\{{ model }}\Request\{{ model }}Request;
 use App\Modules\{{ model }}\Resource\{{ model }}Resource;
 use {{ namespacedModel }};
 use {{ rootNamespace }}Http\Controllers\Controller;
+use App\Repository\Repository;
 
 class {{ class }} extends Controller
 {
- protected {{ model }}Repository  ${{ modelVariable }}Repository;
+    protected ${{ modelVariable }}Repository;
 
-    public function __construct({{ model }}Repository ${{ modelVariable }}Repository){
-        $this->{{ modelVariable }}Repository = ${{ modelVariable }}Repository;
+    public function __construct(){
+      $this->{{ modelVariable }}Repository = new Repository(new {{ model }}() );
     }
     /**
      * Display a listing of the resource.
