@@ -10,12 +10,10 @@ class CreateCommand extends Command
 
     private $types = [
        'controller',
-        'interface',
         'resource',
         'request',
         'model',
         'observer',
-        'repository',
         'service',
 
     ];
@@ -51,45 +49,40 @@ class CreateCommand extends Command
                 mkdir($path, 0777, true);
             }
 
-            if ($type == 'interface') {
-                $this->implementInterface($type);
-                continue  ;
-            }
+
 
             if ( !file_exists ( base_path ( "app/Modules/".ucfirst($this->name)."/".ucfirst($type)."/".ucfirst($this->name).ucfirst($type).".php" ) ) ) {
                 $this->implement($type);
             }else{
                 $this->error("Module with that name ({$this->name}) already exists");
-                exit(0);
+               continue;
             }
         }
+        $this->implementInterface();
         \Artisan::call('make:factory', ['name' => ucfirst($this->name)]);
         \Artisan::call('make:migration', ['name' => 'create'. Str::plural($this->name).'_table']);
-        \Artisan::call('make:test', ['name' => ucfirst($this->name).'Test']);
 
     }
 
-    private function implementInterface($type)
+    private function implementInterface()
     {
-        $search = [
-            '{{modelName}}',
-            '{{ namespaceRead }}',
-            '{{ namespaceWrite }}',
+        if ( ! file_exists ( $path = base_path ( "app/Repository/" ) ) ) {
+            mkdir($path, 0777, true);
+        }
+        $template = self::GetStubs('readinterface') ;
+        if ( !file_exists ( base_path ( "app/Repository/ReadRepositoryInterface.php" ) ) ) {
+            file_put_contents(base_path("app/Repository/ReadRepositoryInterface.php"), $template);
+        }
+        $template =  self::GetStubs('writeinterface') ;
 
+        if ( !file_exists ( base_path ( "app/Repository/WriteRepositoryInterface.php" ) ) ) {
+            file_put_contents(base_path("app/Repository/WriteRepositoryInterface.php"), $template);
+        }
 
-        ];
-        $replace = [
-            ucfirst($this->name),
-            'App\Modules\\'.ucfirst($this->name).'\\Interface',
-            'App\Modules\\'.ucfirst($this->name).'\\Interface',
-
-        ];
-
-        $template = str_replace( $search, $replace, self::GetStubs('readinterface') );
-        file_put_contents(base_path ( "app/Modules/".ucfirst($this->name)."/".ucfirst($type)."/Read".ucfirst($this->name)."RepositoryInterface.php" ), $template);
-        $template = str_replace( $search, $replace, self::GetStubs('writeinterface') );
-        file_put_contents(base_path ( "app/Modules/".ucfirst($this->name)."/".ucfirst($type)."/Write".ucfirst($this->name)."RepositoryInterface.php" ), $template);
-
+        $template =  self::GetStubs('repository') ;
+        if ( !file_exists ( base_path ( "app/Repository/Repository.php" ) ) ) {
+            file_put_contents(base_path("app/Repository/Repository.php"), $template);
+        }
 
     }
 
