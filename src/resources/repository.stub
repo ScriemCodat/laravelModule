@@ -1,14 +1,14 @@
 <?php
-namespace {{ namespace }};
-use App\Modules\{{modelName}}\Interface\Read{{modelName}}RepositoryInterface;
-use App\Modules\{{modelName}}\Interface\Write{{modelName}}RepositoryInterface;
+namespace App\Repository;
+use App\Repository\ReadRepositoryInterface;
+use App\Repository\WriteRepositoryInterface;
 use ScriemCodat\Repository\AbstractRepository;
-use {{ namespacedModel }};
 
-class {{modelName}}Repository extends AbstractRepository implements Read{{modelName}}RepositoryInterface, Write{{modelName}}RepositoryInterface
+
+class Repository extends AbstractRepository implements ReadRepositoryInterface, WriteRepositoryInterface
 {
 
-    public function __construct({{modelName}} $model)
+    public function __construct($model)
     {
         $this->model = $model;
     }
