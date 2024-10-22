@@ -143,7 +143,7 @@ Abstract class AbstractRepository
          $querys = $this->getModel()->query();
          if ($q) {
             $querys->where(function ($query) use ($q,$searchIn,$likeTerm) {
-                $query->whereAny($searchIn,$likeTerm, '%' . strtolower($q) . '%');
+                $query->whereAny($searchIn,$likeTerm, strtolower($q) . '%');
             });
          }
          if (in_array($sortBy, $validSortColumns)) {
