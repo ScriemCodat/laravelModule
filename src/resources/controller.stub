@@ -11,8 +11,16 @@ use App\Modules\{{ model }}\Service\{{ model }}Service;
 
 class {{ class }} extends Controller
 {
-    protected ${{ model }}Service;
+    /**
+     * @var {{ model }}Service
+     */
+    protected {{ model }}Service ${{ modelVariable }}Service;
 
+    /**
+     * {{ class }} constructor.
+     *
+     * @param  {{ model }}Service  ${{ modelVariable }}
+     */
     public function __construct({{ model }}Service ${{ modelVariable }}){
       $this->{{ modelVariable }}Service = ${{ modelVariable }} );
     }
