@@ -7,13 +7,14 @@ use App\Modules\{{ model }}\Resource\{{ model }}Resource;
 use {{ namespacedModel }};
 use {{ rootNamespace }}Http\Controllers\Controller;
 use App\Repository\Repository;
+use App\Modules\{{ model }}\Service\{{ model }}Service;
 
 class {{ class }} extends Controller
 {
-    protected ${{ modelVariable }}Repository;
+    protected ${{ model }}Service;
 
-    public function __construct(){
-      $this->{{ modelVariable }}Repository = new Repository(new {{ model }}() );
+    public function __construct({{ model }}Service ${{ modelVariable }}){
+      $this->{{ modelVariable }}Service = ${{ modelVariable }} );
     }
     /**
      * Display a listing of the resource.
