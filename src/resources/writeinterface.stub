@@ -1,10 +1,8 @@
 <?php
-namespace {{ namespaceWrite }};
+namespace App\Repository;
 
 
-
-
-interface Write{{modelName}}RepositoryInterface {
+interface WriteRepositoryInterface {
   public function create($data);
   public function update($id, $data);
   public function deleteById($id);
