@@ -22,7 +22,7 @@ class {{ class }} extends Controller
      * @param  {{ model }}Service  ${{ modelVariable }}
      */
     public function __construct({{ model }}Service ${{ modelVariable }}){
-      $this->{{ modelVariable }}Service = ${{ modelVariable }} );
+      $this->{{ modelVariable }}Service = ${{ modelVariable }} ;
     }
     /**
      * Display a listing of the resource.
