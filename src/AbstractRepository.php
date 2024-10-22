@@ -1,12 +1,12 @@
-	<?php
-	namespace ScriemCodat\Repository;
-	use Illuminate\Pagination\LengthAwarePaginator;
-	
-	Abstract class AbstractRepository
-	{ 
+<?php
+namespace ScriemCodat\Repository;
+use Illuminate\Pagination\LengthAwarePaginator;
+
+Abstract class AbstractRepository
+{ 
 	protected $model;
-	
-	
+
+
 	public function getModel()
 	{
 	return $this->model;
