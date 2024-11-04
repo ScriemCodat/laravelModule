@@ -31,6 +31,10 @@ Abstract class AbstractRepository
 	{
 	return $this->getModel()->with($relations)->get($columns);
 	}
+	public function loadRelation($model,$relations= [])
+        {
+	 return $model->load($relations);
+	 }
 	
 	public function allTrashed()
 	{
