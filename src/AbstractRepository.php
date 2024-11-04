@@ -137,10 +137,14 @@ Abstract class AbstractRepository
 		return $this->getModel()->whereAny($values, '%' . strtolower($search) . '%' );
 	}
 	
-	public function getPaginated(?string $q, ?string $sortBy,array $searchIn,array $validSortColumns, string $orderBy = 'asc', int $itemsPerPage = 15, int $page = 1,$relations=[],$columns=['*']): LengthAwarePaginator
+	public function getPaginated(?string $q, ?string $sortBy,array $searchIn,array $validSortColumns, string $orderBy = 'asc', int $itemsPerPage = 15, int $page = 1,array $relations=[],array $columns=['*'],array $fromRelation = [],): LengthAwarePaginator
 	{
+
 		 $likeTerm = config('database.default') == 'pgsql' ? 'ILIKE' : 'LIKE';
 		 $querys = $this->getModel()->with($relations);
+         if (!empty($fromRelation)) {
+            $querys->where($fromRelation[0], $fromRelation[1]);
+         }
 		 if ($q) {
 		    $querys->where(function ($query) use ($q,$searchIn,$likeTerm) {
 			$query->whereAny($searchIn,$likeTerm, strtolower($q) . '%');
