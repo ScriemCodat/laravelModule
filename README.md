@@ -43,6 +43,34 @@ This project includes a command-line tool that automates the creation of module 
     - Repository Implementations
     - Factories
     - Migrations
+  
+ ```php
+public function doSomeStuff($productSearchService ProductSearchService)
+{
+$relationSearch = [
+            'Facility' => [
+                'relation' => [
+                    'Company' => [
+                        'fields' => ['name']
+                    ],
+                ],
+                'fields' => ['name', 'fiscal_no', 'serial_no']
+            ],
+        ];
+
+        $request->merge([
+            'sortBy' => $this->sortBy ?? 'companies.id',
+            'orderBy' => $this->sortDirection,
+            'itemsPerPage' => config('app.itemsPerPage'),
+            'page' => $this->getPage(),
+            'status' => '1',
+            'searchText' => $this->search,
+            'searchIn' => ['name', 'fiscal_no', 'serial_no'],
+            'relationSearch' => $relationSearch,
+
+        ]);
+    $this->amefsService->getAllFiltered($request);
+}
 
 ## Running Tests
 Tests are not yet defined in this project. Add your tests in the `tests` directory following Laravel's testing practices.
