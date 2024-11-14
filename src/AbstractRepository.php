@@ -187,6 +187,8 @@ abstract class AbstractRepository
         string $searchText,
         array  $searchIn,
         array  $relationSearch,
+        string $sortBy = null,
+        string $sortDirection = 'asc',
         int    $page = 1,
         int    $itemsPerPage = 15,
     )
@@ -195,13 +197,17 @@ abstract class AbstractRepository
         $likeTerm = config('database.default') == 'pgsql' ? 'ILIKE' : 'LIKE';
 
         $eagerLoadRelations = $this->getEagerLoadRelations($relationSearch);
-        return $this->getModel()->with($eagerLoadRelations)
+        $model =  $this->getModel()->with($eagerLoadRelations)
             ->where(function ($query) use ($searchText, $searchIn, $relationSearch, $likeTerm) {
               /*  $this->addMainSearchQuery($query, $searchIn, $likeTerm, $searchText);*/
 
                 $this->addRelationSearchQuery($query, $relationSearch,$likeTerm, $searchText);
-            })
-            ->paginate($itemsPerPage, ['*'], 'page', $page);;
+            });
+        if ($sortBy) {
+            $model->orderBy($sortBy, $sortDirection);
+        }
+
+            return $model->paginate($itemsPerPage, ['*'], 'page', $page);;
 
     }
 
