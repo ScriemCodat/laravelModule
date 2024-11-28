@@ -187,6 +187,7 @@ abstract class AbstractRepository
         string $searchText,
         array  $searchIn,
         array  $relationSearch,
+        array  $scopes = [],
         string $sortBy = null,
         string $sortDirection = 'asc',
         int    $page = 1,
@@ -206,8 +207,13 @@ abstract class AbstractRepository
         if ($sortBy) {
             $model->orderBy($sortBy, $sortDirection);
         }
+        if (!empty($scopes)) {
+            foreach ($scopes as $scope) {
+                $model->$scope();
+            }
+        }
 
-            return $model->paginate($itemsPerPage, ['*'], 'page', $page);;
+        return $model->paginate($itemsPerPage, ['*'], 'page', $page);;
 
     }
 
